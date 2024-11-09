@@ -1,0 +1,9 @@
+spring:
+  application:
+        name: ${SPRING_APP_NAME:spring-sec}
+
+logging:
+  level:
+    org.springframework.security: TRACE
+  pattern:
+    console: ${LOGPATTERN_CONSOLE:%green(%d{HH:mm:ss.SSS}) %blue(%-5.5level) %red([%20.20thread]) %yellow(%-40.40logger) - %msg%n}
