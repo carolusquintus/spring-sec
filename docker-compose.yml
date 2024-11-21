@@ -1,0 +1,16 @@
+services:
+  sec-db:
+    image: mysql/mysql-server:8.0.22
+    container_name: sec-db
+    ports:
+      - "3316:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - sec-db-data:/var/lib/mysql
+
+volumes:
+  sec-db-data:
