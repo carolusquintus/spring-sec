@@ -1,6 +1,17 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
   application:
         name: ${SPRING_APP_NAME:spring-sec}
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:3316/${MYSQL_DATABASE}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+  jpa:
+    show-sql: ${JPA_SHOW_SQL}
+    properties:
+      hibernate:
+        format_sql: ${JPA_FORMAT_SQL}
 
 logging:
   level:
