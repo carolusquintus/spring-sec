@@ -26,17 +26,17 @@ VALUES ('admin', 'admin');
 
 CREATE TABLE IF NOT EXISTS customer
 (
-    id       BIGINT AUTO_INCREMENT
-        PRIMARY KEY,
-    email    VARCHAR(45)  NULL,
-    password VARCHAR(255) NULL,
-    role     VARCHAR(45)  NULL,
-    CONSTRAINT UK1xnaqqsgphjppu4xnppn8nnin
-        UNIQUE (email)
+    id       BINARY(16) DEFAULT (UUID_TO_BIN(UUID())) NOT NULL,
+    username VARCHAR(45)                              NOT NULL,
+    email    VARCHAR(45)                              NOT NULL,
+    password VARCHAR(255)                             NOT NULL,
+    role     VARCHAR(45)                              NOT NULL,
+    enabled  BOOLEAN    DEFAULT TRUE                  NOT NULL,
+    PRIMARY KEY (id)
 );
 
-INSERT INTO customer (email, password, role)
-VALUES ('user@example.com', '{noop}EazyBytes@12345', 'read');
-INSERT INTO customer (email, password, role)
-VALUES ('admin@example.com', '{bcrypt}$2a$12$mrWlqf3q2sthXPdx1v4X.ukc0URyQAnPGf3IkrM1mqiEWuntQgNfG', 'admin');
+INSERT INTO customer (username, email, password, role)
+VALUES ('user', 'user@example.com', '{noop}EazyBytes@12345', 'read');
+INSERT INTO customer (username, email, password, role)
+VALUES ('admin', 'admin@example.com', '{bcrypt}$2a$12$mrWlqf3q2sthXPdx1v4X.ukc0URyQAnPGf3IkrM1mqiEWuntQgNfG', 'admin');
 
