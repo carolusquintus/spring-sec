@@ -16,5 +16,6 @@ spring:
 logging:
   level:
     org.springframework.security: TRACE
+    sql: DEBUG
   pattern:
     console: ${LOGPATTERN_CONSOLE:%green(%d{HH:mm:ss.SSS}) %blue(%-5.5level) %red([%20.20thread]) %yellow(%-40.40logger) - %msg%n}
