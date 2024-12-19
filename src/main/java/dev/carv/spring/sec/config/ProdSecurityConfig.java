@@ -1,5 +1,7 @@
 package dev.carv.spring.sec.config;
 
+import dev.carv.spring.sec.exception.handler.CustomAccessDeniedHandler;
+import dev.carv.spring.sec.exception.handler.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -11,8 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.password.HaveIBeenPwnedRestApiPasswordChecker;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @Profile("prod")
 public class ProdSecurityConfig {
@@ -23,19 +23,12 @@ public class ProdSecurityConfig {
             .requiresChannel(channel -> channel.anyRequest().requiresSecure())
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(requests -> requests
-            .requestMatchers("/account", "/balance", "/card", "/loan").authenticated()
-            .requestMatchers("/contact", "/notice", "/error", "/customer/**").permitAll());
-//        http.formLogin(FormLoginConfigurer::disable);
-//        http.httpBasic(HttpBasicConfigurer::disable);
-        http.formLogin(withDefaults());
-        http.httpBasic(withDefaults());
+                .requestMatchers("/account", "/balance", "/card", "/loan").authenticated()
+                .requestMatchers("/contact", "/notice", "/error", "/customer/**").permitAll())
+            .httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()))
+            .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
         return http.build();
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService(DataSource dataSource) {
-//        return new JdbcUserDetailsManager(dataSource);
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
