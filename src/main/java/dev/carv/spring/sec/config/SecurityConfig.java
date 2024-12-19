@@ -1,5 +1,7 @@
 package dev.carv.spring.sec.config;
 
+import dev.carv.spring.sec.exception.handler.CustomAccessDeniedHandler;
+import dev.carv.spring.sec.exception.handler.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -23,12 +25,13 @@ public class SecurityConfig {
             .requiresChannel(channel -> channel.anyRequest().requiresInsecure())
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(requests -> requests
-            .requestMatchers("/account", "/balance", "/card", "/loan").authenticated()
-            .requestMatchers("/contact", "/notice", "/error", "/customer/**").permitAll());
-//        http.formLogin(FormLoginConfigurer::disable);
-//        http.httpBasic(HttpBasicConfigurer::disable);
-        http.formLogin(withDefaults());
-        http.httpBasic(withDefaults());
+                .requestMatchers("/account", "/balance", "/card", "/loan").authenticated()
+                .requestMatchers("/contact", "/notice", "/error", "/customer/**").permitAll())
+            .formLogin(withDefaults())
+            .httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()))
+            .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
+//            .formLogin(FormLoginConfigurer::disable)
+//            .httpBasic(HttpBasicConfigurer::disable);
         return http.build();
     }
 
