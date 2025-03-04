@@ -13,6 +13,11 @@ spring:
       hibernate:
         format_sql: ${JPA_FORMAT_SQL}
 
+server:
+  servlet:
+    session:
+      timeout: 2m
+
 logging:
   level:
     org.springframework.security: TRACE
