@@ -31,8 +31,8 @@ VALUES
 CREATE TABLE IF NOT EXISTS customer
 (
     customer_id     INT                         NOT NULL AUTO_INCREMENT,
-    name            VARCHAR(100)                NOT NULL,
-    surname         VARCHAR(100)                NOT NULL,
+    first_name      VARCHAR(100)                NOT NULL,
+    last_name       VARCHAR(100)                NOT NULL,
     username        VARCHAR(45)                 NOT NULL,
     email           VARCHAR(45)                 NOT NULL,
     mobile_number   VARCHAR(20)                 NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS customer
     PRIMARY KEY (customer_id)
 );
 
-INSERT INTO customer (customer_id, name, surname, username, email, mobile_number, password, role, created_at)
+INSERT INTO customer (customer_id, first_name, last_name, username, email, mobile_number, password, role, created_at)
 VALUES
     (1, 'Usuario', 'Administrador', 'admin', 'admin@example.com', '55 5656 5656', '{bcrypt}$2a$12$wH5l0JebXQBwn/vETDvEfOMHoNAR1E5c1Q6GEYlxk3dYe0fR8yPNW', 'admin', NOW()),
     (2, 'Usuario', 'Lector', 'user', 'user@example.com', '55 5555 5555', '{noop}EazyBytes@12345', 'read', NOW());
