@@ -16,16 +16,26 @@ public class Customer {
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "customer_id")
     private Long id;
+
     private String firstName;
+
     private String lastName;
+
     private String username;
+
     private String email;
+
     private String mobileNumber;
+
     private String password;
+
     private String role;
+
     private boolean enabled;
+
     @Column(name = "created_at")
     private LocalDateTime createdDateTime;
+
     @Column(name = "updated_at")
     private LocalDateTime updatedDateTime;
 
