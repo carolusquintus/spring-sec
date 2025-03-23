@@ -3,6 +3,7 @@ package dev.carv.spring.sec.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -21,9 +22,9 @@ public class Notice {
 
     private String noticeDetail;
 
-    private String noticeBeginDate;
+    private LocalDate noticeBeginDate;
 
-    private String noticeEndDate;
+    private LocalDate noticeEndDate;
 
     @Column(name = "created_at")
     private LocalDateTime createdDateTime;
