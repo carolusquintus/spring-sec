@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface CustomerRepository extends CrudRepository<Customer, UUID> {
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
     Optional<Customer> findByEmail(String email);
 
