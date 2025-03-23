@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS contact_messages;
+DROP TABLE IF EXISTS contact;
 DROP TABLE IF EXISTS notice;
 DROP TABLE IF EXISTS card;
 DROP TABLE IF EXISTS loan;
@@ -194,7 +194,7 @@ VALUES
 
 
 
-CREATE TABLE contact_messages
+CREATE TABLE contact
 (
     contact_id      VARCHAR(50)     NOT NULL,
     contact_name    VARCHAR(50)     NOT NULL,
