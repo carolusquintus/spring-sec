@@ -16,8 +16,8 @@ public class LoanController {
     private final LoanRepository repository;
 
     @GetMapping("/loan")
-    public List<Loan> getLoan(@RequestParam Long id) {
-        return repository.findByCustomerIdOrderByStartDateDesc(id);
+    public List<Loan> getLoan(@RequestParam("customer_id") Long customerId) {
+        return repository.findByCustomerIdOrderByStartDateDesc(customerId);
     }
 
 }

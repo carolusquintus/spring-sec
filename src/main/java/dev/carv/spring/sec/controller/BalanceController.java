@@ -16,8 +16,8 @@ public class BalanceController {
     private final TransactionRepository repository;
 
     @GetMapping("/balance")
-    public List<Transaction> getBalance(@RequestParam Long id) {
-        return repository.findByCustomerIdOrderByTransactionDateTimeDesc(id);
+    public List<Transaction> getBalance(@RequestParam("customer_id") Long customer_id) {
+        return repository.findByCustomerIdOrderByTransactionDateTimeDesc(customer_id);
     }
 
 }

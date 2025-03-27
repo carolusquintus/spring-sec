@@ -16,8 +16,8 @@ public class CardController {
     private final CardRepository repository;
 
     @GetMapping("/card")
-    public List<Card> getCard(@RequestParam Long id) {
-        return repository.findByCustomerId(id);
+    public List<Card> getCard(@RequestParam("customer_id") Long customer_id) {
+        return repository.findByCustomerId(customer_id);
     }
 
 }

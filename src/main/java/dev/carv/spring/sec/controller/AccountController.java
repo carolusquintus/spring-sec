@@ -14,8 +14,8 @@ public class AccountController {
     private final AccountRepository repository;
 
     @GetMapping("/account")
-    public Account getAccount(@RequestParam Long id) {
-        return repository.findByCustomerId(id).orElse(null);
+    public Account getAccount(@RequestParam("customer_id") Long customerId) {
+        return repository.findByCustomerId(customerId).orElse(null);
     }
 
 }
