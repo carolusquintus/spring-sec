@@ -1,10 +1,12 @@
 package dev.carv.spring.sec.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -27,6 +29,7 @@ public class Customer {
 
     private String mobileNumber;
 
+    @JsonProperty(access = WRITE_ONLY)
     private String password;
 
     private String role;
