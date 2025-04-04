@@ -4,11 +4,9 @@ import dev.carv.spring.sec.model.Customer;
 import dev.carv.spring.sec.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -46,6 +44,11 @@ public class CustomerController {
                 .internalServerError()
                 .body("User registration failed: %s".formatted(e.getMessage()));
         }
+    }
+
+    @GetMapping("/info")
+    public Customer getCustomerInfo(Authentication auth) {
+        return repository.findByUsername(auth.getName()).or(() -> repository.findByEmail(auth.getName())).orElse(null);
     }
 
 }
