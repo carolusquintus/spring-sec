@@ -23,6 +23,7 @@ public class ProdSecurityConfig {
             .sessionManagement(session -> session.invalidSessionUrl("/invalid-session"))
             .requiresChannel(channel -> channel.anyRequest().requiresSecure())
             .csrf(AbstractHttpConfigurer::disable)
+            .cors(CorsConfig::getHttpSecurityCorsConfigurer)
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/account", "/balance", "/card", "/loan", "/customer/info").authenticated()
                 .requestMatchers("/contact", "/notice", "/error", "/customer/sign-up", "/invalid-session").permitAll())

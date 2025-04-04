@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .maxSessionsPreventsLogin(true))
             .requiresChannel(channel -> channel.anyRequest().requiresInsecure())
             .csrf(AbstractHttpConfigurer::disable)
+            .cors(CorsConfig::getHttpSecurityCorsConfigurer)
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/account", "/balance", "/card", "/loan", "/customer/info").authenticated()
                 .requestMatchers("/contact", "/notice", "/error", "/customer/sign-up", "/invalid-session").permitAll())
@@ -38,7 +39,6 @@ public class SecurityConfig {
             .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
         return http.build();
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
