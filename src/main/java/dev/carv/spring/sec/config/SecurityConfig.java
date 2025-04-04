@@ -31,8 +31,8 @@ public class SecurityConfig {
             .requiresChannel(channel -> channel.anyRequest().requiresInsecure())
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/account", "/balance", "/card", "/loan").authenticated()
-                .requestMatchers("/contact", "/notice", "/error", "/customer/**", "/invalid-session").permitAll())
+                .requestMatchers("/account", "/balance", "/card", "/loan", "/customer/info").authenticated()
+                .requestMatchers("/contact", "/notice", "/error", "/customer/sign-up", "/invalid-session").permitAll())
             .formLogin(withDefaults())
             .httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()))
             .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));

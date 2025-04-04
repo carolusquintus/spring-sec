@@ -24,8 +24,8 @@ public class ProdSecurityConfig {
             .requiresChannel(channel -> channel.anyRequest().requiresSecure())
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/account", "/balance", "/card", "/loan").authenticated()
-               .requestMatchers("/contact", "/notice", "/error", "/customer/**", "/invalid-session").permitAll())
+                .requestMatchers("/account", "/balance", "/card", "/loan", "/customer/info").authenticated()
+                .requestMatchers("/contact", "/notice", "/error", "/customer/sign-up", "/invalid-session").permitAll())
             .httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()))
             .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
         return http.build();
