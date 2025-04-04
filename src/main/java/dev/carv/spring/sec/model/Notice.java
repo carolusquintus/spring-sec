@@ -1,5 +1,6 @@
 package dev.carv.spring.sec.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -26,9 +27,11 @@ public class Notice {
 
     private LocalDate noticeEndDate;
 
+    @JsonIgnore
     @Column(name = "created_at")
     private LocalDateTime createdDateTime;
 
+    @JsonIgnore
     @Column(name = "updated_at")
     private LocalDateTime updatedDateTime;
 
