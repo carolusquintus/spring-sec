@@ -19,7 +19,7 @@ public class ProdSecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
+        return http
             .sessionManagement(session -> session.invalidSessionUrl("/invalid-session"))
             .requiresChannel(channel -> channel.anyRequest().requiresSecure())
             .csrf(AbstractHttpConfigurer::disable)
@@ -28,8 +28,8 @@ public class ProdSecurityConfig {
                 .requestMatchers("/account", "/balance", "/card", "/loan", "/customer/info").authenticated()
                 .requestMatchers("/contact", "/notice", "/error", "/customer/sign-up", "/invalid-session").permitAll())
             .httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()))
-            .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
-        return http.build();
+            .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()))
+            .build();
     }
 
     @Bean

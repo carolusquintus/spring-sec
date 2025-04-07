@@ -22,7 +22,7 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
+        return http
             .sessionManagement(session -> session
                 .sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::newSession)
                 .invalidSessionUrl("/invalid-session")
@@ -36,8 +36,8 @@ public class SecurityConfig {
                 .requestMatchers("/contact", "/notice", "/error", "/customer/sign-up", "/invalid-session").permitAll())
             .formLogin(withDefaults())
             .httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()))
-            .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()));
-        return http.build();
+            .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()))
+            .build();
     }
 
     @Bean
