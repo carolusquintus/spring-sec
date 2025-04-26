@@ -2,6 +2,7 @@ package dev.carv.spring.sec.config;
 
 import dev.carv.spring.sec.exception.handler.CustomAccessDeniedHandler;
 import dev.carv.spring.sec.exception.handler.CustomBasicAuthenticationEntryPoint;
+import dev.carv.spring.sec.filter.CsrfCookieFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -13,6 +14,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.password.HaveIBeenPwnedRestApiPasswordChecker;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -23,14 +26,15 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-            .sessionManagement(session -> session
-                .sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::newSession)
-                .invalidSessionUrl("/invalid-session")
-                .maximumSessions(3)
-                .maxSessionsPreventsLogin(true))
+//            .sessionManagement(session -> session
+//                .sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::newSession)
+//                .invalidSessionUrl("/invalid-session")
+//                .maximumSessions(3)
+//                .maxSessionsPreventsLogin(true))
             .requiresChannel(channel -> channel.anyRequest().requiresInsecure())
-            .csrf(AbstractHttpConfigurer::disable)
             .cors(CorsConfig::getHttpSecurityCorsConfigurer)
+            .csrf(csrfConfig -> csrfConfig.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+            .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/account", "/balance", "/card", "/loan", "/customer/info").authenticated()
                 .requestMatchers("/contact", "/notice", "/error", "/customer/sign-up", "/invalid-session").permitAll())
