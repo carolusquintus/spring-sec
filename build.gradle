@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'maven-publish'
+    id 'io.freefair.lombok' version '8.6'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+dependencies {
+    api libs.org.springframework.boot.spring.boot.starter.security
+    api libs.org.springframework.boot.spring.boot.starter.web
+    api libs.org.springframework.boot.spring.boot.starter.data.jpa
+    api libs.org.springframework.boot.spring.boot.starter.jdbc
+    compileOnly libs.org.projectlombok.lombok
+    runtimeOnly libs.org.springframework.boot.spring.boot.devtools
+    runtimeOnly libs.com.mysql.mysql.connector.j
+    annotationProcessor libs.org.projectlombok.lombok
+    testImplementation libs.org.springframework.boot.spring.boot.starter.test
+    testImplementation libs.org.springframework.security.spring.security.test
+}
+
+group = 'dev.carv'
+version = '0.0.1-SNAPSHOT'
+description = 'spring-sec'
+
+java.sourceCompatibility = JavaVersion.VERSION_21
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}
