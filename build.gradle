@@ -1,28 +1,8 @@
 plugins {
     id 'java'
     id 'java-library'
-    id 'maven-publish'
-    id 'io.freefair.lombok' version '8.6'
-}
-
-repositories {
-    mavenLocal()
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
-    }
-}
-
-dependencies {
-    api libs.org.springframework.boot.spring.boot.starter.security
-    api libs.org.springframework.boot.spring.boot.starter.web
-    api libs.org.springframework.boot.spring.boot.starter.data.jpa
-    api libs.org.springframework.boot.spring.boot.starter.jdbc
-    compileOnly libs.org.projectlombok.lombok
-    runtimeOnly libs.org.springframework.boot.spring.boot.devtools
-    runtimeOnly libs.com.mysql.mysql.connector.j
-    annotationProcessor libs.org.projectlombok.lombok
-    testImplementation libs.org.springframework.boot.spring.boot.starter.test
-    testImplementation libs.org.springframework.security.spring.security.test
+    alias libs.plugins.spring.boot
+    alias libs.plugins.spring.dependency.management
 }
 
 group = 'dev.carv'
@@ -32,12 +12,21 @@ description = 'spring-sec'
 java.sourceCompatibility = JavaVersion.VERSION_21
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
-        }
-    }
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation  libs.spring.boot.starter.web,
+                    libs.spring.boot.starter.jdbc,
+                    libs.spring.boot.starter.data.jpa,
+                    libs.spring.boot.starter.security
+    compileOnly libs.lombok
+    runtimeOnly libs.spring.boot.devtools,
+                libs.mysql.connector.j
+    annotationProcessor libs.lombok
+    testImplementation  libs.spring.boot.starter.test,
+                        libs.spring.security.test
 }
 
 tasks.withType(JavaCompile) {
