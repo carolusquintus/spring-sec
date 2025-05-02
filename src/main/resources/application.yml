@@ -12,8 +12,8 @@ spring:
     properties:
       hibernate:
         format_sql: ${JPA_FORMAT_SQL}
-  jackson:
-    property-naming-strategy: SNAKE_CASE
+#  jackson:
+#    property-naming-strategy: SNAKE_CASE
 
 server:
   servlet:
