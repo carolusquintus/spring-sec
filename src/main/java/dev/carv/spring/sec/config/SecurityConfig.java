@@ -19,7 +19,7 @@ import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
-@Profile("default")
+@Profile("!prod")
 public class SecurityConfig {
 
     @Bean
