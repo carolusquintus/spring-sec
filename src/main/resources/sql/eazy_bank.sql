@@ -48,10 +48,10 @@ VALUES
 
 CREATE TABLE authority
 (
-    id          INT         NOT NULL AUTO_INCREMENT,
-    customer_id INT         NOT NULL,
-    name        VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id),
+    authority_id    INT         NOT NULL AUTO_INCREMENT,
+    customer_id     INT         NOT NULL,
+    name            VARCHAR(50) NOT NULL,
+    PRIMARY KEY (authority_id),
     KEY         customer_id (customer_id),
     CONSTRAINT  fk_authority_customer FOREIGN KEY (customer_id) REFERENCES customer (customer_id) ON DELETE CASCADE
 );
