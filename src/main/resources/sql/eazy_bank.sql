@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS customer
 
 INSERT INTO customer (customer_id, first_name, last_name, username, email, mobile_number, password, role, created_at)
 VALUES
-    (1, 'Usuario', 'Administrador', 'admin', 'admin@example.com', '55 5656 5656', '{bcrypt}$2a$12$wH5l0JebXQBwn/vETDvEfOMHoNAR1E5c1Q6GEYlxk3dYe0fR8yPNW', 'admin', NOW()),
+    (1, 'Usuario', 'Administrador', 'admin', 'admin@example.com', '55 5656 5656', '{bcrypt}$2a$10$TWlmdUTRtGtQw91m1x1sDOknI8vYcgE78F0Tc0gFuM1MU3xNV8jbC', 'admin', NOW()),
     (2, 'Usuario', 'Lector', 'user', 'user@example.com', '55 5555 5555', '{noop}EazyBytes@12345', 'read', NOW());
 
 
