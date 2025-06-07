@@ -58,10 +58,12 @@ CREATE TABLE authority
 
 INSERT INTO authority (customer_id, name)
 VALUES
-    (1, 'VIEWACCOUNT'),
-    (1, 'VIEWCARD'),
-    (1, 'VIEWLOANS'),
-    (1, 'VIEWBALANCE');
+    (1, 'VIEW_ACCOUNT'),
+    (1, 'VIEW_CARD'),
+    (1, 'VIEW_LOANS'),
+    (1, 'VIEW_BALANCE'),
+    (2, 'VIEW_CARD'),
+    (2, 'VIEW_LOANS');
 
 
 
