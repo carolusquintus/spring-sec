@@ -11,6 +11,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - sec-db-data:/var/lib/mysql
+      - ./src/main/resources/sql/eazy_bank.sql:/docker-entrypoint-initdb.d/01.sql
 
 volumes:
   sec-db-data:
