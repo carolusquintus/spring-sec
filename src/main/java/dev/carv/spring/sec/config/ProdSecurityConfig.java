@@ -36,7 +36,11 @@ public class ProdSecurityConfig {
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
             .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
             .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/account", "/balance", "/card", "/loan", "/customer/info").authenticated()
+                .requestMatchers("/account").hasAuthority("VIEW_ACCOUNT")
+                .requestMatchers("/balance").hasAnyAuthority("VIEW_BALANCE", "VIEW_ACCOUNT")
+                .requestMatchers("/card").hasAuthority("VIEW_CARDS")
+                .requestMatchers("/loan").hasAuthority("VIEW_LOANS")
+                .requestMatchers("/customer/info").authenticated()
                 .requestMatchers("/contact", "/notice", "/error", "/customer/sign-up", "/invalid-session").permitAll())
             .httpBasic(hbc -> hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()))
             .exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()))

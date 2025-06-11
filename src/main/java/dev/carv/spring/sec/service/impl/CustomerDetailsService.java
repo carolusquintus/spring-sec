@@ -30,11 +30,15 @@ public class CustomerDetailsService implements UserDetailsService {
             .or(() -> repository.findByEmail(username))
             .orElseThrow(() -> new UsernameNotFoundException("Customer not found with email: %s".formatted(username)));
 
+        var authorities = customer.getAuthorities().stream()
+            .map(authority -> new SimpleGrantedAuthority(authority.getName()))
+            .toList();
+
         return CustomerDetailsImpl.builder()
             .username(customer.getUsername())
             .email(customer.getEmail())
             .password(customer.getPassword())
-            .authorities(List.of(new SimpleGrantedAuthority(customer.getRole())))
+            .authorities(authorities)
             .enabled(customer.isEnabled())
             .build();
     }
